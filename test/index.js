@@ -54,7 +54,7 @@ const suite = (loader) => {
   })
 }
 
-if (WebAssembly) {
+if (typeof WebAssembly !== 'undefined') {
   describe('instantiateStreaming', () => {
     describe('node-fetch', () => {
       const PORT = process.env.PORT || 8888
