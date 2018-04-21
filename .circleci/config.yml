@@ -17,6 +17,7 @@ jobs:
       - run:
           name: Setup wat2wasm
           command: |
+            sudo apt-get install cmake
             git submodule update --init --recursive
             cd deps/wabt && make && cd ../../
       - restore_cache:
