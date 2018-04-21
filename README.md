@@ -67,6 +67,7 @@ See MDN document
 git clone git@github.com:Leko/wasm-instantiate-streaming.git
 cd wasm-instantiate-streaming
 
+git submodule update --init --recursive
 cd deps/wabt
 make
 cd ../..
