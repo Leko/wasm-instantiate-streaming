@@ -54,28 +54,38 @@ const suite = (loader) => {
   })
 }
 
-describe('instantiateStreaming', () => {
-  describe('node-fetch', () => {
-    const PORT = process.env.PORT || 8888
-
-    let server
-    before(() => {
-      server = new StaticServer({
-        rootPath: path.join(__dirname, 'fixtures'),
-        port: PORT,
+if (WebAssembly) {
+  describe('instantiateStreaming', () => {
+    describe('node-fetch', () => {
+      const PORT = process.env.PORT || 8888
+  
+      let server
+      before(() => {
+        server = new StaticServer({
+          rootPath: path.join(__dirname, 'fixtures'),
+          port: PORT,
+        })
+        return promisify(server.start.bind(server))()
       })
-      return promisify(server.start.bind(server))()
+      after(() => {
+        server.stop()
+      })
+  
+      suite((wasmName) => fetch(`http://localhost:${PORT}/${wasmName}`))
     })
-    after(() => {
-      server.stop()
+  
+    describe('fs', () => {
+      const readFile = promisify(fs.readFile)
+  
+      suite((wasmName) => readFile(path.join(__dirname, 'fixtures', wasmName)))
     })
-
-    suite((wasmName) => fetch(`http://localhost:${PORT}/${wasmName}`))
   })
-
-  describe('fs', () => {
-    const readFile = promisify(fs.readFile)
-
-    suite((wasmName) => readFile(path.join(__dirname, 'fixtures', wasmName)))
+} else {
+  describe('instantiateStreaming (in environment that WebAssembly is not supported)', () => {
+    it('must reject Promise', () => {
+      return instantiateStreaming()
+        .then(() => assert.fail)
+        .catch(() => assert.ok(true))
+    })
   })
-})
+}
