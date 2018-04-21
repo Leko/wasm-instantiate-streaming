@@ -9,28 +9,36 @@ const { promisify } = require('es6-promisify')
 const { instantiateStreaming } = require('../index')
 
 const suite = (loader) => {
-  it('returns object that contains module', async () => {
-    const result = await instantiateStreaming(loader('no-deps.wasm'))
-    assert.notEqual(typeof result.module, 'undefined')
+  it('returns object that contains module', () => {
+    return instantiateStreaming(loader('no-deps.wasm'))
+      .then(result => {
+        assert.notEqual(typeof result.module, 'undefined')
+      })
   })
-  it('returns object that contains instance', async () => {
-    const result = await instantiateStreaming(loader('no-deps.wasm'))
-    assert.notEqual(typeof result.instance, 'undefined')
+  it('returns object that contains instance', () => {
+    return instantiateStreaming(loader('no-deps.wasm'))
+      .then(result => {
+        assert.notEqual(typeof result.instance, 'undefined')
+      })
   })
-  it('can pass importObject', async () => {
+  it('can pass importObject', () => {
     const imports = {
       imports: {
         imported_func: n => n,
       }
     }
-    const result = await instantiateStreaming(loader('with-deps.wasm'), imports)
-    assert.notEqual(typeof result.instance, 'undefined')
+    return instantiateStreaming(loader('with-deps.wasm'), imports)
+      .then(result => {
+        assert.notEqual(typeof result.instance, 'undefined')
+      })
   })
-  it('can add works', async () => {
-    const { instance } = await instantiateStreaming(loader('no-deps.wasm'))
-    assert.equal(instance.exports.add(1, 2), 3)
+  it('can add works', () => {
+    return instantiateStreaming(loader('no-deps.wasm'))
+      .then(({ instance }) => {
+        assert.equal(instance.exports.add(1, 2), 3)
+      })
   })
-  it('can exported_func works', async () => {
+  it('can exported_func works', () => {
     const arg = 135
     const stub = sinon.stub()
     const imports = {
@@ -38,9 +46,11 @@ const suite = (loader) => {
         imported_func: stub,
       }
     }
-    const { instance } = await instantiateStreaming(loader('with-deps.wasm'), imports)
-    instance.exports.exported_func(arg)
-    assert.ok(stub.calledWith(arg))
+    return instantiateStreaming(loader('with-deps.wasm'), imports)
+      .then(({ instance }) => {
+        instance.exports.exported_func(arg)
+        assert.ok(stub.calledWith(arg))
+      })
   })
 }
 
@@ -49,12 +59,12 @@ describe('instantiateStreaming', () => {
     const PORT = process.env.PORT || 8888
 
     let server
-    before(async () => {
+    before(() => {
       server = new StaticServer({
         rootPath: path.join(__dirname, 'fixtures'),
         port: PORT,
       })
-      await promisify(server.start.bind(server))()
+      return promisify(server.start.bind(server))()
     })
     after(() => {
       server.stop()
