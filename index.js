@@ -36,7 +36,7 @@ function preferInstantiate (wasmModule, importObject) {
 }
 
 function ponyfill () {
-  if (!WebAssembly) {
+  if (typeof WebAssembly === 'undefined') {
     return function instantiateStreaming () {
       return Promise.reject(new Error('WebAssembly is not supported'))
     }
