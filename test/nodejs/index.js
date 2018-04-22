@@ -6,7 +6,7 @@ const { describe, it, before, after } = require('mocha')
 const StaticServer = require('static-server')
 const fetch = require('node-fetch')
 const { promisify } = require('es6-promisify')
-const { instantiateStreaming } = require('../index')
+const { instantiateStreaming } = require('../../index')
 
 const suite = (loader) => {
   it('returns object that contains module', () => {
@@ -62,7 +62,7 @@ if (typeof WebAssembly !== 'undefined') {
       let server
       before(() => {
         server = new StaticServer({
-          rootPath: path.join(__dirname, 'fixtures'),
+          rootPath: path.join(__dirname, '..', 'fixtures'),
           port: PORT,
         })
         return promisify(server.start.bind(server))()
@@ -77,7 +77,7 @@ if (typeof WebAssembly !== 'undefined') {
     describe('fs', () => {
       const readFile = promisify(fs.readFile)
   
-      suite((wasmName) => readFile(path.join(__dirname, 'fixtures', wasmName)))
+      suite((wasmName) => readFile(path.join(__dirname, '..', 'fixtures', wasmName)))
     })
   })
 } else {
