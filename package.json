@@ -7,6 +7,7 @@
     "prepare": "browserify -t uglifyify browser.js -o build/browser.min.js",
     "build:no-deps": "deps/wabt/bin/wat2wasm test/fixtures/no-deps.wat -o test/fixtures/no-deps.wasm",
     "build:with-deps": "deps/wabt/bin/wat2wasm test/fixtures/with-deps.wat -o test/fixtures/with-deps.wasm",
+    "lint": "eslint --cache .",
     "pretest": "npm-run-all build:no-deps build:with-deps",
     "test": "mocha test/nodejs",
     "pretest:browser": "(static-server test/fixtures --no-nocache --port 7777 --cors '*' &)",
