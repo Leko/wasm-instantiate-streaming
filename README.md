@@ -1,5 +1,6 @@
 # wasm-instantiate-streaming
 Polyfill of WebAssembly.instantiateStreaming
+`instantiateStreaming` loading WebAssembly modules efficiently
 
 > The optimizations we applied can be summarized as follows:
 >
@@ -34,10 +35,10 @@ instantiateStreaming(readFile('./some-module.wasm'))
 ```
 
 ### Using without import/require
-Please use `build/wasm-instantiate-streaming.min.js`
+Please use `build/browser.min.js`
 
 ```html
-<script src="path/to/wasm-instantiate-streaming.min.js">
+<script src="path/to/build/browser.min.js">
 ```
 
 ```js

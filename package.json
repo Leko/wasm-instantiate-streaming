@@ -4,7 +4,7 @@
   "description": "Ponyfill of WebAssembly.instantiateStreaming",
   "main": "index.js",
   "scripts": {
-    "prepare": "browserify -t uglifyify browser.js -o build/browser.js",
+    "prepare": "browserify -t uglifyify browser.js -o build/browser.min.js",
     "build:no-deps": "deps/wabt/bin/wat2wasm test/fixtures/no-deps.wat -o test/fixtures/no-deps.wasm",
     "build:with-deps": "deps/wabt/bin/wat2wasm test/fixtures/with-deps.wat -o test/fixtures/with-deps.wasm",
     "pretest": "npm-run-all build:no-deps build:with-deps",
