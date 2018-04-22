@@ -14,6 +14,11 @@
     "test:browser": "mochify test/browser",
     "posttest:browser": "./scripts/kill-by-port 7777"
   },
+  "files": [
+    "index.js",
+    "util.js",
+    "build"
+  ],
   "engines": {
     "node": ">=6.0.0"
   },
