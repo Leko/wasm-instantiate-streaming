@@ -1,9 +1,8 @@
 const assert = require('assert')
 const sinon = require('sinon')
-const { instantiateStreaming } = require('../index')
 const { it } = require('mocha')
 
-const suite = (loader) => {
+const suite = (instantiateStreaming, loader) => {
   it('returns object that contains module', () => {
     return instantiateStreaming(loader('no-deps.wasm'))
       .then(result => {

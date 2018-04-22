@@ -1,13 +1,14 @@
 const assert = require('assert')
 const sinon = require('sinon')
 const { describe, it, before, after } = require('mocha')
-const { instantiateStreaming } = require('../../index')
 const suite = require('../suite')
+
+require('../../browser') // Install it globally
 
 if (typeof WebAssembly !== 'undefined') {
   describe('instantiateStreaming', function () {
     describe('browser', function () {
-      suite(function (wasmName) {
+      suite(instantiateStreaming, function (wasmName) {
         return fetch(`http://localhost:7777/${wasmName}`)
       })
     })

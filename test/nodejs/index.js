@@ -26,13 +26,13 @@ if (typeof WebAssembly !== 'undefined') {
         server.stop()
       })
   
-      suite((wasmName) => fetch(`http://localhost:${PORT}/${wasmName}`))
+      suite(instantiateStreaming, (wasmName) => fetch(`http://localhost:${PORT}/${wasmName}`))
     })
   
     describe('fs', () => {
       const readFile = promisify(fs.readFile)
   
-      suite((wasmName) => readFile(path.join(__dirname, '..', 'fixtures', wasmName)))
+      suite(instantiateStreaming, (wasmName) => readFile(path.join(__dirname, '..', 'fixtures', wasmName)))
     })
   })
 } else {
