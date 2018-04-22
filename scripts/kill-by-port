@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+set -eux
+
+PORT=$1
+
+PID=$(lsof -i:$PORT | grep LISTEN | awk '{print $2}')
+kill -TERM $PID
