@@ -9,7 +9,7 @@
     "build:with-deps": "deps/wabt/bin/wat2wasm test/fixtures/with-deps.wat -o test/fixtures/with-deps.wasm",
     "lint": "eslint --cache .",
     "pretest": "npm-run-all build:no-deps build:with-deps",
-    "test": "mocha test/nodejs",
+    "test": "nyc --reporter=lcov --reporter=text mocha test/nodejs",
     "pretest:browser": "(static-server test/fixtures --no-nocache --port 7777 --cors '*' &)",
     "test:browser": "mochify test/browser",
     "posttest:browser": "./scripts/kill-by-port 7777"
@@ -53,6 +53,7 @@
     "mochify": "^5.6.0",
     "node-fetch": "^2.1.2",
     "npm-run-all": "^4.1.2",
+    "nyc": "^11.7.1",
     "sinon": "^4.5.0",
     "static-server": "^2.2.1",
     "uglifyify": "^4.0.5"
