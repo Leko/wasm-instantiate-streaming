@@ -1,5 +1,3 @@
-// global WebAssembly
-
 const util = require('./util')
 
 function ponyfill () {
@@ -25,6 +23,7 @@ function ponyfill () {
     return source.then(util.toArrayBuffer)
       .then(util.preferCompile)
       .then(mod => {
+        // eslint-disable-next-line promise/no-nesting
         return util.preferInstantiate(mod, importObject)
           .then(instance => {
             return {

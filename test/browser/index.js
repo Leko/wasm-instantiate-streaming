@@ -1,6 +1,6 @@
+/* global instantiateStreaming */
 const assert = require('assert')
-const sinon = require('sinon')
-const { describe, it, before, after } = require('mocha')
+const { describe, it } = require('mocha')
 const suite = require('../suite')
 
 require('../../browser') // Install it globally

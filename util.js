@@ -1,4 +1,4 @@
-function toUint8Array(buff) {
+function toUint8Array (buff) {
   var u = new Uint8Array(buff.length)
   for (var i = 0; i < buff.length; ++i) {
     u[i] = buff[i]
@@ -6,7 +6,7 @@ function toUint8Array(buff) {
   return u
 }
 
-function toArrayBuffer(response) {
+function toArrayBuffer (response) {
   // browser, node-fetch
   if (typeof response.arrayBuffer === 'function') {
     return response.arrayBuffer()
@@ -17,7 +17,7 @@ function toArrayBuffer(response) {
   }
 }
 
-function preferCompile(arrayBuffer) {
+function preferCompile (arrayBuffer) {
   if (WebAssembly.compile) {
     return WebAssembly.compile(arrayBuffer)
   } else {
@@ -25,7 +25,7 @@ function preferCompile(arrayBuffer) {
   }
 }
 
-function preferInstantiate(wasmModule, importObject) {
+function preferInstantiate (wasmModule, importObject) {
   if (WebAssembly.compile) {
     return WebAssembly.instantiate(wasmModule, importObject)
   } else {
