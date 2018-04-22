@@ -3,7 +3,7 @@
 ![node-version](https://img.shields.io/node/v/wasm-instantiate-streaming.svg)
 ![CircleCI](https://circleci.com/gh/Leko/wasm-instantiate-streaming.svg?style=svg)
 ![codecov](https://codecov.io/gh/Leko/wasm-instantiate-streaming/branch/master/graph/badge.svg)
-![license](https://img.shields.io/github/license/mashape/apistatus.svg)
+![license](https://img.shields.io/github/license/Leko/wasm-instantiate-streaming.svg)
 
 Polyfill of WebAssembly.instantiateStreaming
 `instantiateStreaming` loading WebAssembly modules efficiently
