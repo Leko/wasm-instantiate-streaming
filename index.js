@@ -1,39 +1,6 @@
 // global WebAssembly
 
-function toUint8Array (buff) {
-  var u = new Uint8Array(buff.length)
-  for (var i = 0; i < buff.length; ++i) {
-    u[i] = buff[i]
-  }
-  return u
-}
-
-function toArrayBuffer (response) {
-  // browser, node-fetch
-  if (typeof response.arrayBuffer === 'function') {
-    return response.arrayBuffer()
-
-  // Node.js
-  } else {
-    return Promise.resolve(toUint8Array(response))
-  }
-}
-
-function preferCompile (arrayBuffer) {
-  if (WebAssembly.compile) {
-    return WebAssembly.compile(arrayBuffer)
-  } else {
-    return Promise.resolve(new WebAssembly.Module(arrayBuffer))
-  }
-}
-
-function preferInstantiate (wasmModule, importObject) {
-  if (WebAssembly.compile) {
-    return WebAssembly.instantiate(wasmModule, importObject)
-  } else {
-    return Promise.resolve(new WebAssembly.Module(wasmModule))
-  }
-}
+const util = require('./util')
 
 function ponyfill () {
   if (typeof WebAssembly === 'undefined') {
@@ -55,10 +22,10 @@ function ponyfill () {
    */
   function instantiateStreaming (source, importObject) {
     importObject = importObject || {}
-    return source.then(toArrayBuffer)
-      .then(preferCompile)
+    return source.then(util.toArrayBuffer)
+      .then(util.preferCompile)
       .then(mod => {
-        return preferInstantiate(mod, importObject)
+        return util.preferInstantiate(mod, importObject)
           .then(instance => {
             return {
               module: mod,
