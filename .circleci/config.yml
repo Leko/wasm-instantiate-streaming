@@ -34,7 +34,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm run lint
-      - run: npm $TEST_SCRIPT
+      - run: npm run $TEST_SCRIPT
       - run: bash <(curl -s https://codecov.io/bash)
 
   node-v6:
