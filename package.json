@@ -4,10 +4,13 @@
   "description": "Ponyfill of WebAssembly.instantiateStreaming",
   "main": "index.js",
   "scripts": {
-    "pretest": "npm-run-all build:no-deps build:with-deps",
     "build:no-deps": "deps/wabt/bin/wat2wasm test/fixtures/no-deps.wat -o test/fixtures/no-deps.wasm",
     "build:with-deps": "deps/wabt/bin/wat2wasm test/fixtures/with-deps.wat -o test/fixtures/with-deps.wasm",
-    "test": "mocha"
+    "pretest": "npm-run-all build:no-deps build:with-deps",
+    "test": "mocha test/nodejs",
+    "pretest:browser": "(static-server test/fixtures --no-nocache --port 7777 --cors '*' &)",
+    "test:browser": "mochify test/browser",
+    "posttest:browser": "./scripts/kill-by-port 7777"
   },
   "repository": {
     "type": "git",
@@ -30,6 +33,7 @@
     "assert": "^1.4.1",
     "es6-promisify": "^6.0.0",
     "mocha": "^5.1.1",
+    "mochify": "^5.6.0",
     "node-fetch": "^2.1.2",
     "npm-run-all": "^4.1.2",
     "sinon": "^4.5.0",

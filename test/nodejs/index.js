@@ -7,52 +7,7 @@ const StaticServer = require('static-server')
 const fetch = require('node-fetch')
 const { promisify } = require('es6-promisify')
 const { instantiateStreaming } = require('../../index')
-
-const suite = (loader) => {
-  it('returns object that contains module', () => {
-    return instantiateStreaming(loader('no-deps.wasm'))
-      .then(result => {
-        assert.notEqual(typeof result.module, 'undefined')
-      })
-  })
-  it('returns object that contains instance', () => {
-    return instantiateStreaming(loader('no-deps.wasm'))
-      .then(result => {
-        assert.notEqual(typeof result.instance, 'undefined')
-      })
-  })
-  it('can pass importObject', () => {
-    const imports = {
-      imports: {
-        imported_func: n => n,
-      }
-    }
-    return instantiateStreaming(loader('with-deps.wasm'), imports)
-      .then(result => {
-        assert.notEqual(typeof result.instance, 'undefined')
-      })
-  })
-  it('can add works', () => {
-    return instantiateStreaming(loader('no-deps.wasm'))
-      .then(({ instance }) => {
-        assert.equal(instance.exports.add(1, 2), 3)
-      })
-  })
-  it('can exported_func works', () => {
-    const arg = 135
-    const stub = sinon.stub()
-    const imports = {
-      imports: {
-        imported_func: stub,
-      }
-    }
-    return instantiateStreaming(loader('with-deps.wasm'), imports)
-      .then(({ instance }) => {
-        instance.exports.exported_func(arg)
-        assert.ok(stub.calledWith(arg))
-      })
-  })
-}
+const suite = require('../suite')
 
 if (typeof WebAssembly !== 'undefined') {
   describe('instantiateStreaming', () => {
@@ -84,7 +39,7 @@ if (typeof WebAssembly !== 'undefined') {
   describe('instantiateStreaming (in environment that WebAssembly is not supported)', () => {
     it('must reject Promise', () => {
       return instantiateStreaming()
-        .then(() => assert.fail)
+        .then(() => assert.fail('must must be reject instantiateStreaming in environment that WebAssembly is not supported'))
         .catch(() => assert.ok(true))
     })
   })
