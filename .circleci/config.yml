@@ -54,4 +54,4 @@ jobs:
     environment:
       TEST_SCRIPT: 'test:browser'
     docker:
-      - image: circleci/node:latest-browsers
+      - image: node:latest
