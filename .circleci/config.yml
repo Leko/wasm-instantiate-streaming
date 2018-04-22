@@ -5,7 +5,6 @@ workflows:
       - node-v6
       - node-v8
       - node-latest
-      - browser
 
 version: 2
 jobs:
@@ -13,8 +12,6 @@ jobs:
     docker:
       - image: circleci/node:latest
     working_directory: ~/repo
-    environment:
-      TEST_SCRIPT: test
     steps:
       - checkout
       - run:
@@ -34,7 +31,7 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm run lint
-      - run: npm run $TEST_SCRIPT
+      - run: npm test
       - run: bash <(curl -s https://codecov.io/bash)
 
   node-v6:
@@ -47,11 +44,5 @@ jobs:
       - image: node:8
   node-latest:
     <<: *base
-    docker:
-      - image: node:latest
-  browser:
-    <<: *base
-    environment:
-      TEST_SCRIPT: 'test:browser'
     docker:
       - image: node:latest
