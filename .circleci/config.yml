@@ -5,6 +5,7 @@ workflows:
       - node-v6
       - node-v8
       - node-latest
+      - browser
 
 version: 2
 jobs:
@@ -21,12 +22,6 @@ jobs:
             apt-get install -y cmake clang
             git submodule update --init --recursive
             cd deps/wabt && make && cd ../../
-      - run:
-          name: Setup sauce-connect
-          command: |
-            wget -o /usr/local/bin/sc https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz
-            chmod +x /usr/local/bin/sc
-            sc -h
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
@@ -38,6 +33,49 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm run lint
       - run: npm test
+      - run: bash <(curl -s https://codecov.io/bash)
+  browser:
+    docker:
+      - image: circleci/node:latest
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - run:
+          name: Setup wat2wasm
+          command: |
+            apt-get -y -qq update
+            apt-get install -y cmake clang
+            git submodule update --init --recursive
+            cd deps/wabt && make && cd ../../
+      - run:
+          name: Setup sauce-connect
+          command: |
+            cd /tmp
+            wget https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz
+            tar -zxvf sc-4.4.12-linux.tar.gz
+            mv sc-4.4.12-linux/bin/sc /usr/local/bin/sc
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run: npm run pretest
+      - run:
+        command: |
+          sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY > /tmp/sc.log &
+          while :
+          do
+            if [ "$(grep 'you may start your tests' /tmp/sc.log | wc -l | awk '{print $1}')" = "2" ]; then
+              break
+            fi
+            sleep 1
+          done
+          cat /tmp/sc.log
+          npm run test:browser
       - run: bash <(curl -s https://codecov.io/bash)
 
   node-v6:
