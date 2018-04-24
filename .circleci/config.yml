@@ -25,6 +25,7 @@ jobs:
           name: Setup sauce-connect
           command: |
             wget -o /usr/local/bin/sc https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz
+            chmod +x /usr/local/bin/sc
             sc -h
       - restore_cache:
           keys:
