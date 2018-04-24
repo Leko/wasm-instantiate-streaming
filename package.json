@@ -24,7 +24,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/Leko/instantiate-streaming-ponyfill.git"
+    "url": "git+ssh://git@github.com/Leko/wasm-instantiate-streaming.git"
   },
   "keywords": [
     "wasm",
@@ -36,9 +36,9 @@
   "author": "Leko <leko.noor@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Leko/instantiate-streaming-ponyfill/issues"
+    "url": "https://github.com/Leko/wasm-instantiate-streaming/issues"
   },
-  "homepage": "https://github.com/Leko/instantiate-streaming-ponyfill#readme",
+  "homepage": "https://github.com/Leko/wasm-instantiate-streaming#readme",
   "devDependencies": {
     "assert": "^1.4.1",
     "browserify": "^16.2.0",
