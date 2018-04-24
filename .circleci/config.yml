@@ -76,7 +76,6 @@ jobs:
           done
           cat /tmp/sc.log
           npm run test:browser
-      - run: bash <(curl -s https://codecov.io/bash)
 
   node-v6:
     <<: *base
