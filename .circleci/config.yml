@@ -70,7 +70,7 @@ jobs:
             sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY > /tmp/sc.log &
             while :
             do
-              if [ "$(grep 'you may start your tests' /tmp/sc.log | wc -l | awk '{print $1}')" = "2" ]; then
+              if [ "$(grep 'Sauce Connect is up, you may start your tests' /tmp/sc.log | wc -l | awk '{print $1}')" = "2" ]; then
                 break
               fi
               sleep 1
