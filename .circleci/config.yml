@@ -77,7 +77,6 @@ jobs:
             done
             cat /tmp/sc.log
             npm run test:browser
-            kill %1
 
   node-v6:
     <<: *base
