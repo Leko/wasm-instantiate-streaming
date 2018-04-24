@@ -21,6 +21,11 @@ jobs:
             apt-get install -y cmake clang
             git submodule update --init --recursive
             cd deps/wabt && make && cd ../../
+      - run:
+          name: Setup sauce-connect
+          command: |
+            wget -o /usr/local/bin/sc https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz
+            sc -h
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
