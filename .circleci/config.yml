@@ -54,6 +54,9 @@ jobs:
             wget https://saucelabs.com/downloads/sc-4.4.12-linux.tar.gz
             tar -zxvf sc-4.4.12-linux.tar.gz
             mv sc-4.4.12-linux/bin/sc /usr/local/bin/sc
+      - run:
+          name: Install lsof
+          command: sudo apt-get install lsof
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
