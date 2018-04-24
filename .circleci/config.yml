@@ -65,17 +65,18 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run: npm run pretest
       - run:
-        command: |
-          sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY > /tmp/sc.log &
-          while :
-          do
-            if [ "$(grep 'you may start your tests' /tmp/sc.log | wc -l | awk '{print $1}')" = "2" ]; then
-              break
-            fi
-            sleep 1
-          done
-          cat /tmp/sc.log
-          npm run test:browser
+          name: 'Run browser test'
+          command: |
+            sc -u $SAUCE_USERNAME -k $SAUCE_ACCESS_KEY > /tmp/sc.log &
+            while :
+            do
+              if [ "$(grep 'you may start your tests' /tmp/sc.log | wc -l | awk '{print $1}')" = "2" ]; then
+                break
+              fi
+              sleep 1
+            done
+            cat /tmp/sc.log
+            npm run test:browser
 
   node-v6:
     <<: *base
