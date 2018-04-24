@@ -56,7 +56,7 @@ jobs:
             mv sc-4.4.12-linux/bin/sc /usr/local/bin/sc
       - run:
           name: Install lsof
-          command: sudo apt-get install lsof
+          command: apt-get install lsof
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
