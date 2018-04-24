@@ -11,7 +11,7 @@
     "pretest": "npm-run-all build:no-deps build:with-deps",
     "test": "nyc --reporter=lcov --reporter=text mocha test/nodejs",
     "pretest:browser": "(static-server test/fixtures --no-nocache --port 7777 --cors '*' &)",
-    "test:browser": "mochify test/browser",
+    "test:browser": "mochify --wd test/browser",
     "posttest:browser": "./scripts/kill-by-port 7777"
   },
   "files": [
