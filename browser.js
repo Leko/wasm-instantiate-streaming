@@ -1,2 +1,2 @@
-const { instantiateStreaming } = require('./index')
-window.instantiateStreaming = instantiateStreaming
+const { instantiateStreaming } = require("./index");
+window.instantiateStreaming = instantiateStreaming;

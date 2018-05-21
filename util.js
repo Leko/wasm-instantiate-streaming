@@ -1,35 +1,35 @@
-function toUint8Array (buff) {
-  var u = new Uint8Array(buff.length)
+function toUint8Array(buff) {
+  var u = new Uint8Array(buff.length);
   for (var i = 0; i < buff.length; ++i) {
-    u[i] = buff[i]
+    u[i] = buff[i];
   }
-  return u
+  return u;
 }
 
-function toArrayBuffer (response) {
+function toArrayBuffer(response) {
   // browser, node-fetch
-  if (typeof response.arrayBuffer === 'function') {
-    return response.arrayBuffer()
+  if (typeof response.arrayBuffer === "function") {
+    return response.arrayBuffer();
 
-  // Node.js
+    // Node.js
   } else {
-    return Promise.resolve(toUint8Array(response))
+    return Promise.resolve(toUint8Array(response));
   }
 }
 
-function preferCompile (arrayBuffer) {
+function preferCompile(arrayBuffer) {
   if (WebAssembly.compile) {
-    return WebAssembly.compile(arrayBuffer)
+    return WebAssembly.compile(arrayBuffer);
   } else {
-    return Promise.resolve(new WebAssembly.Module(arrayBuffer))
+    return Promise.resolve(new WebAssembly.Module(arrayBuffer));
   }
 }
 
-function preferInstantiate (wasmModule, importObject) {
+function preferInstantiate(wasmModule, importObject) {
   if (WebAssembly.compile) {
-    return WebAssembly.instantiate(wasmModule, importObject)
+    return WebAssembly.instantiate(wasmModule, importObject);
   } else {
-    return Promise.resolve(new WebAssembly.Module(wasmModule))
+    return Promise.resolve(new WebAssembly.Module(wasmModule));
   }
 }
 
@@ -37,5 +37,5 @@ module.exports = {
   toUint8Array: toUint8Array,
   toArrayBuffer: toArrayBuffer,
   preferCompile: preferCompile,
-  preferInstantiate: preferInstantiate,
-}
+  preferInstantiate: preferInstantiate
+};
