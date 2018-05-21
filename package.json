@@ -1,6 +1,6 @@
 {
   "name": "wasm-instantiate-streaming",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Ponyfill of WebAssembly.instantiateStreaming",
   "main": "index.js",
   "scripts": {
