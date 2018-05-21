@@ -4,21 +4,21 @@
   "description": "Ponyfill of WebAssembly.instantiateStreaming",
   "main": "index.js",
   "scripts": {
+    "precommit": "pretty-quick --staged",
     "prepare": "browserify -t uglifyify browser.js -o build/browser.min.js",
-    "build:no-deps": "deps/wabt/bin/wat2wasm test/fixtures/no-deps.wat -o test/fixtures/no-deps.wasm",
-    "build:with-deps": "deps/wabt/bin/wat2wasm test/fixtures/with-deps.wat -o test/fixtures/with-deps.wasm",
+    "build:no-deps":
+      "deps/wabt/bin/wat2wasm test/fixtures/no-deps.wat -o test/fixtures/no-deps.wasm",
+    "build:with-deps":
+      "deps/wabt/bin/wat2wasm test/fixtures/with-deps.wat -o test/fixtures/with-deps.wasm",
     "lint": "eslint --cache .",
     "pretest": "npm-run-all build:no-deps build:with-deps",
     "test": "nyc --reporter=lcov --reporter=text mocha test/nodejs",
-    "pretest:browser": "(static-server test/fixtures --no-nocache --port 7777 --cors '*' &)",
+    "pretest:browser":
+      "(static-server test/fixtures --no-nocache --port 7777 --cors '*' &)",
     "test:browser": "mochify --wd test/browser",
     "posttest:browser": "./scripts/kill-by-port 7777"
   },
-  "files": [
-    "index.js",
-    "util.js",
-    "build"
-  ],
+  "files": ["index.js", "util.js", "build"],
   "engines": {
     "node": ">=6.0.0"
   },
@@ -44,16 +44,20 @@
     "browserify": "^16.2.0",
     "es6-promisify": "^6.0.0",
     "eslint": "^4.19.1",
+    "eslint-config-prettier": "^2.9.0",
     "eslint-config-standard": "^11.0.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-node": "^6.0.1",
     "eslint-plugin-promise": "^3.7.0",
     "eslint-plugin-standard": "^3.0.1",
+    "husky": "^0.14.3",
     "mocha": "^5.1.1",
     "mochify": "^5.6.0",
     "node-fetch": "^2.1.2",
     "npm-run-all": "^4.1.2",
     "nyc": "^11.7.1",
+    "prettier": "^1.12.1",
+    "pretty-quick": "^1.5.1",
     "sinon": "^4.5.0",
     "static-server": "^2.2.1",
     "uglifyify": "^4.0.5"
