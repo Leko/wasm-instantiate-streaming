@@ -4,6 +4,8 @@ module.exports = {
     'plugin:promise/recommended',
     'plugin:node/recommended',
     'standard',
+    'prettier',
+    'prettier/standard',
   ],
   globals: {
     fetch: true,
