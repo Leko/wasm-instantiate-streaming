@@ -1,7 +1,9 @@
 # wasm-instantiate-streaming
+
 ![package-version](https://img.shields.io/npm/v/wasm-instantiate-streaming.svg)
 ![node-version](https://img.shields.io/node/v/wasm-instantiate-streaming.svg)
 ![CircleCI](https://circleci.com/gh/Leko/wasm-instantiate-streaming.svg?style=svg)
+[![Build status](https://ci.appveyor.com/api/projects/status/oftn2gm9kak4mefc/branch/master?svg=true)](https://ci.appveyor.com/project/Leko/wasm-instantiate-streaming/branch/master)
 ![codecov](https://codecov.io/gh/Leko/wasm-instantiate-streaming/branch/master/graph/badge.svg)
 ![license](https://img.shields.io/github/license/Leko/wasm-instantiate-streaming.svg)
 
@@ -17,30 +19,34 @@ Polyfill of WebAssembly.instantiateStreaming
 > &mdash; [Loading WebAssembly modules efficiently  |  Web  |  Google Developers](https://developers.google.com/web/updates/2018/04/loading-wasm)
 
 ## Install
+
 ```
 npm install wasm-instantiate-streaming
 ```
 
 ## Usage
+
 ### Using import/require
+
 ```js
-import { instantiateStreaming } from 'wasm-instantiate-streaming'
+import { instantiateStreaming } from "wasm-instantiate-streaming";
 
 // For browser
-instantiateStreaming(fetch('some-module.wasm'))
+instantiateStreaming(fetch("some-module.wasm"));
 
 // Use with node-fetch
-const fetch = require('node-fetch')
-instantiateStreaming(fetch('some-module.wasm'))
+const fetch = require("node-fetch");
+instantiateStreaming(fetch("some-module.wasm"));
 
 // Use with fs module
-const fs = require('fs')
-const { promisify } = require('util')
-const readFile = promisify(fs.readFile)
-instantiateStreaming(readFile('./some-module.wasm'))
+const fs = require("fs");
+const { promisify } = require("util");
+const readFile = promisify(fs.readFile);
+instantiateStreaming(readFile("./some-module.wasm"));
 ```
 
 ### Using without import/require
+
 Please use `build/browser.min.js`
 
 ```html
@@ -48,28 +54,31 @@ Please use `build/browser.min.js`
 ```
 
 ```js
-instantiateStreaming(fetch('some-module.wasm'))
+instantiateStreaming(fetch("some-module.wasm"));
 ```
 
 ### Pass importsObject
+
 ```js
 const importObject = {
   imports: {
-    imported_func (arg) {
-      console.log(arg)
+    imported_func(arg) {
+      console.log(arg);
     }
   }
-}
+};
 
-instantiateStreaming(fetch('some-module.wasm'), importObject)
+instantiateStreaming(fetch("some-module.wasm"), importObject);
 ```
 
 ## API
+
 See MDN document
 
 > &mdash; [WebAssembly.instantiateStreaming() - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WebAssembly/instantiateStreaming)
 
 ## Development
+
 ```sh
 git clone git@github.com:Leko/wasm-instantiate-streaming.git
 cd wasm-instantiate-streaming
@@ -84,4 +93,5 @@ npm test
 ```
 
 ## License
+
 [MIT](https://opensource.org/licenses/MIT)
