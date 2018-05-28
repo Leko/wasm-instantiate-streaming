@@ -1,4 +1,7 @@
 # wasm-instantiate-streaming
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/Leko/wasm-instantiate-streaming.svg)](https://greenkeeper.io/)
+
 ![package-version](https://img.shields.io/npm/v/wasm-instantiate-streaming.svg)
 ![node-version](https://img.shields.io/node/v/wasm-instantiate-streaming.svg)
 ![CircleCI](https://circleci.com/gh/Leko/wasm-instantiate-streaming.svg?style=svg)
