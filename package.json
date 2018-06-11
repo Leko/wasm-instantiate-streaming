@@ -58,7 +58,7 @@
     "nyc": "^11.7.1",
     "prettier": "^1.12.1",
     "pretty-quick": "^1.5.1",
-    "sinon": "^5.0.10",
+    "sinon": "^6.0.0",
     "static-server": "^2.2.1",
     "uglifyify": "^5.0.0"
   }
