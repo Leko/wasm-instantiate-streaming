@@ -1,5 +1,5 @@
 # Caution: This package is nonstandard way
-This package not incompatible with WebAssembly.instantiate streaming.
+This package not incompatible with WebAssembly.instantiate streaming specification.
 
 # wasm-instantiate-streaming
 
