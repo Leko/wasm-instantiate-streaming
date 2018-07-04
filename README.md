@@ -1,3 +1,6 @@
+# Caution: This package is nonstandard way
+This package not incompatible with WebAssembly.instantiate streaming.
+
 # wasm-instantiate-streaming
 
 [![Greenkeeper badge](https://badges.greenkeeper.io/Leko/wasm-instantiate-streaming.svg)](https://greenkeeper.io/)
